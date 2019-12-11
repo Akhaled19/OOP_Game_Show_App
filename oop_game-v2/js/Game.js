@@ -21,9 +21,10 @@ class Game {
             startScreen.hidden();
 
             // this method sets the 'activePhrase' property to a random phrase
-            this.activePhrase = getRandomPhrase();
+            this.activePhrase = this.getRandomPhrase();
 
             // this method calls 'addPhraseToDisplay() method on the 'activePhrase' property 
+            this.activePhrase = this.addPhraseToDisplay();
         }    
 
         // add a method and call it 'getRandomPhrase()'
@@ -57,8 +58,11 @@ class Game {
         //add a method and call it 'removeLife()' 
         removeLife() {
             //this method removes a life from the scoreboard increments the missed property (one of the liveHeart.png images is replaced with a lostHeart.png image)   
+            
             //if the player has lost the game 
+            if(this.missed < 4 ) {
                 //call the gameOver() method 
+            }    
         } 
 
         //add a method and call it 'gameOver()' 
