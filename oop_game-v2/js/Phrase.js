@@ -9,8 +9,14 @@ class Phrase {
     }    
     //add a method and call it 'addPhraseToDisplay()'
     addPhraseToDisplay() {
-        //this method adds the phrase to the gameboard
-        let gameboard = this.phrase;
+        //this method adds the letter placeholder to display when game starts
+        //each letter is represented by an empty box, one li element for each letter
+      
+        phrase.forEach(phrase => { //convert to forEach
+            let answerArr = [];
+            answerArr[i] = "_";
+            
+        });
     }    
     //add a second method and call it 'checkLetter()' 
     checkLetter() {
