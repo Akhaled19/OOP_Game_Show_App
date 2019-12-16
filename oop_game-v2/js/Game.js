@@ -3,7 +3,7 @@
 // Game class
 class Game {
     //add a constructor,
-    constructor (missed, phrase, activePhrase) { 
+    constructor () { 
         //initialize 'missed' property and set it to 0
         this.missed = 0;
 
@@ -12,42 +12,58 @@ class Game {
 
         //initialize 'activePhrase' property and set it to null 
         this.activePhrase = null;
-    }    
+    };    
 
         // add a method  and call it 'startGame()'
         startGame() {
             // this method hides the start screen overlay 
             const startScreen = document.getElementById("overlay");
-            startScreen.hidden();
+            startScreen.style.display = 'none'
 
-            // this method sets the 'activePhrase' property to a random phrase
-            this.activePhrase = this.getRandomPhrase();
-
-            // this method calls 'addPhraseToDisplay() method on the 'activePhrase' property 
-            this.activePhrase = this.addPhraseToDisplay();
-        }    
+            // this method sets the 'activePhrase' property to a random phrase and adds that phrase to board by calling the addPhraseToDisplay() method
+            let word = this.getRandomPhrase().addPhraseToDisplay();
+            this.activePhrase = word; 
+        };    
 
         // add a method and call it 'getRandomPhrase()'
         getRandomPhrase() {
             //this method randomly retrieves one phrase from the phrases array
-            const randomNumber = Math.floor(Math.random() * this.phrase.length);
-            const randomPhrase = this.phrase[randomNumber];
-        }  
+            const randomPhrase = this.phrase[Math.floor(Math.random() * this.phrase.length)];
+            return randomPhrase;   
+        };  
 
         // add a method and call it 'handleInteraction()' 
         handleInteraction() {
             //this method disables the selected letter's onscreen keyboard button 
-            
-            //if the phrase does NOT include the guessed letter
+            const keyboard = document.getElementsByClassName('key'); 
+            const value = keyboard[keyboard.selectedIndex].value;
+            value.setAttribute("disabled", "disabled");
+
+            //if the button clicked by the player does not match a letter in the phrase
+            if(value.checkLetter() = false ) {
                 //the WRONG CSS class is added to the selected letter's keyboard button 
+                value.classList.add('wrong');
                 //the 'removeLife()' method is called
-             
-            //if the phrase includes the guessed letter  
+                this.removeLife();
+           
+            //if the button clicked by the player does match a letter in the phrase 
+            } else if(value.checkLetter() = true) {  
                 //the CHOSEN CSS class is added to the selected letter's keyboard button 
+                value.classList.remove('wrong');
+                value.classList.add('chosen');
                 //the 'showMatchedLetter()' method is called on the phrase 
+                Phrase.showMatchedLetter();
                 //the 'checkForWin()'method is called
+                this.checkForWin();
                     //if the player has won the game 
-                        //the 'gameOver()' method is called 
+                    if(this.checkLetter() = true) {
+                        //the 'gameOver()' method is called
+                        this.gameOver();
+                    } else {
+                        return false;
+                    }   
+
+            }            
         }
 
         //add a method and call it 'checkForWin()' method  

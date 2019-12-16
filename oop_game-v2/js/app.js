@@ -1,18 +1,16 @@
 //Global variables 
     //button = Start Game
     const startGameButton = document.getElementById('btn__reset');
-
+    let game;
 //add a click event(keyup or keydown) to button = Start Game
-startGameButton.addEventListener('keyup', event => {
+startGameButton.addEventListener('click', e => {
 //w/keyup or keydown = pressing a physical keyboard button results in the 'handleInteraction()' method being called for the associated onscreen keyboard button
-   console.log(startGameButton);
-    const target = event.target; 
-    if(target.isComposing || target.keyCode === 229 ) {
-        console.log(startGameButton);
-        //creates a new game object  
-        //starts the game 
-    }
-});
+    //creates a new game object  
+    game = new Game();
+     //starts the game 
+    game.startGame();
+}); 
+
 
 
 //disable event listen on anywhere besides onscreen keyboard buttons
