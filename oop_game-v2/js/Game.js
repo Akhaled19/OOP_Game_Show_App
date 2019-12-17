@@ -12,7 +12,7 @@ class Game {
 
         //initialize 'activePhrase' property and set it to null 
         this.activePhrase = null;
-    };    
+    }   
 
         // add a method  and call it 'startGame()'
         startGame() {
@@ -21,16 +21,17 @@ class Game {
             startScreen.style.display = 'none'
 
             // this method sets the 'activePhrase' property to a random phrase and adds that phrase to board by calling the addPhraseToDisplay() method
-            let word = this.getRandomPhrase().addPhraseToDisplay();
-            this.activePhrase = word; 
-        };    
+            this.activePhrase = this.getRandomPhrase();
+            this.activePhrase.this.addPhraseToDisplay();
+            
+        }    
 
         // add a method and call it 'getRandomPhrase()'
         getRandomPhrase() {
             //this method randomly retrieves one phrase from the phrases array
             const randomPhrase = this.phrase[Math.floor(Math.random() * this.phrase.length)];
             return randomPhrase;   
-        };  
+        }
 
         // add a method and call it 'handleInteraction()' 
         handleInteraction() {
@@ -68,7 +69,7 @@ class Game {
 
         //add a method and call it 'checkForWin()' method  
         checkForWin() {
-            //this method checks if the player has revealed all the letters in the active 'phrase'
+            //this method checks if the player has revealed all the letters in the 'activePhrase'
         }
 
         //add a method and call it 'removeLife()' 
