@@ -21,9 +21,9 @@ class Game {
             startScreen.style.display = 'none'
 
             // this method sets the 'activePhrase' property to a random phrase and adds that phrase to board by calling the addPhraseToDisplay() method
-            this.activePhrase = this.getRandomPhrase();
-            this.activePhrase.addPhraseToDisplay();
-            
+            let word = this.getRandomPhrase();
+            word.addPhraseToDisplay();
+            this.activePhrase = word;
         }    
 
         // add a method and call it 'getRandomPhrase()'
