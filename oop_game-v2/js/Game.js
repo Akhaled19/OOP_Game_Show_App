@@ -22,7 +22,7 @@ class Game {
 
             // this method sets the 'activePhrase' property to a random phrase and adds that phrase to board by calling the addPhraseToDisplay() method
             this.activePhrase = this.getRandomPhrase();
-            this.activePhrase.this.addPhraseToDisplay();
+            this.activePhrase.addPhraseToDisplay();
             
         }    
 
@@ -70,21 +70,36 @@ class Game {
         //add a method and call it 'checkForWin()' method  
         checkForWin() {
             //this method checks if the player has revealed all the letters in the 'activePhrase'
+
         }
 
         //add a method and call it 'removeLife()' 
         removeLife() {
             //this method removes a life from the scoreboard increments the missed property (one of the liveHeart.png images is replaced with a lostHeart.png image)   
-            
+            const scoreboard = document.querySelectorAll('img');
+            for (let i = 0; i < scoreboard.length; i++) {
+                const lostHeartScore = scoreboard[i].src.replace('liveHeart.png', 'lostHeart.png');
+            }
             //if the player has lost the game 
             if(this.missed < 4 ) {
                 //call the gameOver() method 
+                this.gameOver();
             }    
         } 
 
         //add a method and call it 'gameOver()' 
         gameOver() {
-            //this method displays a final 'win' or 'loss' message 
-            //by showing the original start screen overlay styled with either win or loss CSS class  
+            //showing the original start screen overlay
+            startScreen.style.display = '';
+            //this method displays a final 'win' or 'loss' message and updating overlay screen
+            const h1 = document.getElementById('game-over-message');
+            if (this.missed < 4) {
+                h1.innerHTML = "Game over";
+                startGame.classList.add('lose');
+            } else {
+                h1.classList.remove('lose');
+                h1.innerHTML = "Congratulations, you won!";
+                startScreen.classList.add('win');
+            }
         }           
 }
