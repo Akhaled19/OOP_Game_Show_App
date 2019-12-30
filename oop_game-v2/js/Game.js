@@ -12,19 +12,19 @@ class Game {
 
         //initialize 'activePhrase' property and set it to null 
         this.activePhrase = null;
-    }    //['filter method', 'getter method', 'object interaction', 'callback function', 'anonymous function' ]; 
+    }    
 
         //method  that creates phrases 
         phraseMaker() {
            let phrases = [
-               new phrase("filter method"),
-               new phrase("getter method"),
-               new phrase("object interaction"),
-               new phrase("callback function"),
-               new phrase("anonymous function")
+               new Phrase("filter method"),
+               new Phrase("getter method"),
+               new Phrase("object interaction"),
+               new Phrase("callback function"),
+               new Phrase("anonymous function")
            ];
          return phrases;
-        }
+        };
 
         // add a method and call it 'getRandomPhrase()'
         getRandomPhrase() {
@@ -47,11 +47,12 @@ class Game {
         }    
 
         // add a method and call it 'handleInteraction()' 
-        handleInteraction() {
+        handleInteraction(button) {
             //this method disables the selected letter's onscreen keyboard button 
-            const keyboard = document.getElementsByClassName('key'); 
-            const value = keyboard[keyboard.selectedIndex].value;
-            value.setAttribute("disabled", "disabled");
+            //const keyboard = document.getElementsByClassName('key'); 
+            //const value = keyboard[keyboard.selectedIndex].value;
+            //value.setAttribute("disabled", "disabled");
+            button.setAttribute("disabled", true);
 
             //if the button clicked by the player does not match a letter in the phrase
             if(value.checkLetter() = false ) {
@@ -117,4 +118,3 @@ class Game {
         }           
 }
 
-console.log(phraseMaker);
