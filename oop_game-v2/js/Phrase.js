@@ -12,24 +12,24 @@ class Phrase {
         //this method adds the letter placeholder to display when game starts
        let phrasediv = document.getElementById('phrase').firstElementChild;
        let liBoxs = document.createElement('li');
-       phrasediv.appendChild(liBoxs);
         //each letter is represented by an empty box, one li element for each letter
-        for(let i = 0; i < Game.phrase.length; i ++) {
+        for(let i = 0; i < this.phrase.length; i ++) {
             if(this.phrase[i] !== "") {
                 liBoxs.classList.add('hide letter');
+                phrasediv.appendChild(liBoxs);
+                
             } else {
                 liBoxs.classList.remove('hide letter');
                 liBoxs.classList.add('space');
+                phrasediv.appendChild(liBoxs);
             }
 
         }
     }    
     //add a second method and call it 'checkLetter()' 
-    checkLetter() {
-        key = document.getElementsByClassName('key');
-        let i = key;
+    checkLetter(key) {
         //this method checks if a letter is in the phrase
-        if(this.phrase.includes(i)) {
+        if(this.phrase.includes(key)) {
             return true;
         } else {
             return false;

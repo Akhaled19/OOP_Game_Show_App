@@ -4,7 +4,7 @@
     const screenKeyboard = document.getElementsByClassName('keyrow');
     let game;
 //add a click event(keyup or keydown) to button = Start Game
-startGameButton.addEventListener('click', e => {
+startGameButton.addEventListener('click', () => {
 //w/keyup or keydown = pressing a physical keyboard button results in the 'handleInteraction()' method being called for the associated onscreen keyboard button
     //creates a new game object  
     game = new Game();
@@ -17,7 +17,7 @@ screenKeyboard.addEventListener('click', button => {
     //call the 'handleInteraction()' method on the game object
     //only on buttons 
     //let button = e.target;
-    game.handleInteraction(button);
+    Game.handleInteraction(button);
 
 });
 

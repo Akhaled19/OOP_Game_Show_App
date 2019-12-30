@@ -8,11 +8,31 @@ class Game {
         this.missed = 0;
 
         //initialize 'phrase' property and set it to an array [] of five Phrase objects
-        this.phrase = ['filter method', 'getter method', 'object interaction', 'callback function', 'anonymous function' ]; 
+        this.phrase = this.phraseMaker(); 
 
         //initialize 'activePhrase' property and set it to null 
         this.activePhrase = null;
-    }   
+    }    //['filter method', 'getter method', 'object interaction', 'callback function', 'anonymous function' ]; 
+
+        //method  that creates phrases 
+        phraseMaker() {
+           let phrases = [
+               new phrase("filter method"),
+               new phrase("getter method"),
+               new phrase("object interaction"),
+               new phrase("callback function"),
+               new phrase("anonymous function")
+           ];
+         return phrases;
+        }
+
+        // add a method and call it 'getRandomPhrase()'
+        getRandomPhrase() {
+            //this method randomly retrieves one phrase from the phrases array
+            const randomPhrase = this.phrase[Math.floor(Math.random() * this.phrase.length)];
+            return randomPhrase;   
+        }
+
 
         // add a method  and call it 'startGame()'
         startGame() {
@@ -25,13 +45,6 @@ class Game {
             word.addPhraseToDisplay();
             this.activePhrase = word;
         }    
-
-        // add a method and call it 'getRandomPhrase()'
-        getRandomPhrase() {
-            //this method randomly retrieves one phrase from the phrases array
-            const randomPhrase = this.phrase[Math.floor(Math.random() * this.phrase.length)];
-            return randomPhrase;   
-        }
 
         // add a method and call it 'handleInteraction()' 
         handleInteraction() {
@@ -103,3 +116,5 @@ class Game {
             }
         }           
 }
+
+console.log(phraseMaker);
