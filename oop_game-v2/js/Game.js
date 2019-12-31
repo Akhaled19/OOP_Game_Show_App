@@ -29,22 +29,23 @@ class Game {
         // add a method and call it 'getRandomPhrase()'
         getRandomPhrase() {
             //this method randomly retrieves one phrase from the phrases array
-            const randomPhrase = this.phrase[Math.floor(Math.random() * this.phrase.length)];
+            let randomPhrase = this.phrase[Math.floor(Math.random() * this.phrase.length)];
             return randomPhrase;   
         }
 
         // add a method  and call it 'startGame()'
         startGame() {
-            // this method hides the start screen overlay 
+            //this method hides the start screen overlay 
             const startScreen = document.getElementById("overlay");
             startScreen.style.display = 'none'
 
-            // this method sets the 'activePhrase' property to a random phrase and adds that phrase to board by calling the addPhraseToDisplay() method
+            //this method sets the 'activePhrase' property to a random phrase 
             let word = this.getRandomPhrase();
-            word.addPhraseToDisplay();
+            //this returns an object (phrase), which then allows me to call that object's display method
             this.activePhrase = word;
+            word.addPhraseToDisplay();
         }    
-
+ 
         // add a method and call it 'handleInteraction()' & pass in a 'button' property 
         handleInteraction(button) {
             //this method disables the selected letter's onscreen keyboard button 
@@ -66,24 +67,20 @@ class Game {
                 //the 'removeLie()' method is called
                 this.removeLife()
                 //the WRONG CSS class is added to the selected letter's keyboard button 
-                value.classList.add('wrong');
-                value.classList.remove('chosen');
+                button.classList.add('wrong');
+                button.classList.remove('chosen');
 
             } 
         }
              
-        //add a method and call it 'checkForWin()' method  
-        checkForWin() {
-            //this method checks if the player has revealed all the letters in the 'activePhrase'
-
-        }
 
         //add a method and call it 'removeLife()' 
         removeLife() {
-            //this method removes a life from the scoreboard increments the missed property (one of the liveHeart.png images is replaced with a lostHeart.png image)   
+            //this method removes a life from the scoreboard, increments the missed property (one of the liveHeart.png images is replaced with a lostHeart.png image)   
             const scoreboard = document.querySelectorAll('img');
             for (let i = 0; i < scoreboard.length; i++) {
-                const lostHeartScore = scoreboard[i].src.replace('liveHeart.png', 'lostHeart.png');
+                scoreboard[i].src.replace('liveHeart.png', 'lostHeart.png');
+                return this.missed++
             }
             //if the player has lost the game 
             if(this.missed < 4 ) {
@@ -91,6 +88,18 @@ class Game {
                 this.gameOver();
             }    
         } 
+
+        //add a method and call it 'checkForWin()' method  
+        checkForWin() {
+            //this method checks if the player has revealed all the letters in the 'activePhrase'
+            const hiddenLetters = this.activePhrase.classList.contains('hide');
+            const shownLetters = this.activePhrase.classList.contains('show');
+            if(hiddenLetters.length === game.activePhrase.phrase.replace(/\s+/g, '').length) {
+                return false;
+            }else if(shownLetters.length === game.activePhrase.phrase.replace(/\s+/g, '').length) {
+                return true;
+            }
+        }
 
         //add a method and call it 'gameOver()' 
         gameOver() {

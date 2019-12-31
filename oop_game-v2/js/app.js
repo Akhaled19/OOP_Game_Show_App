@@ -2,7 +2,7 @@
     //button = Start Game
     const startGameButton = document.getElementById('btn__reset');
     //button = keyboard 
-    const screenKeyboard = document.getElementsByClassName('key');
+    const screenKeyboard = document.getElementsByClassName('keyrow', 'key');
     let game;
 //add a click event(keyup or keydown) to button = Start Game
 startGameButton.addEventListener('click', () => {
@@ -16,9 +16,9 @@ startGameButton.addEventListener('click', () => {
 //add a click event to each of the onscreen keyboard buttons = user interaction
 screenKeyboard.addEventListener('click', (e) => {
     //targe only the buttons 
-    const button = e.target;
+    let button = e.target;
     //call the 'handleInteraction()' method on the game object
-    Game.handleInteraction(button);
+    game.handleInteraction(button);
 
 });
 
