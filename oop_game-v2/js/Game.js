@@ -33,7 +33,6 @@ class Game {
             return randomPhrase;   
         }
 
-
         // add a method  and call it 'startGame()'
         startGame() {
             // this method hides the start screen overlay 
@@ -46,41 +45,33 @@ class Game {
             this.activePhrase = word;
         }    
 
-        // add a method and call it 'handleInteraction()' 
+        // add a method and call it 'handleInteraction()' & pass in a 'button' property 
         handleInteraction(button) {
             //this method disables the selected letter's onscreen keyboard button 
-            //const keyboard = document.getElementsByClassName('key'); 
-            //const value = keyboard[keyboard.selectedIndex].value;
-            //value.setAttribute("disabled", "disabled");
             button.setAttribute("disabled", true);
 
-            //if the button clicked by the player does not match a letter in the phrase
-            if(value.checkLetter() = false ) {
+            //if the button clicked by the player does match a letter in the phrase
+            if(this.activePhrase.checkLetter(button.innerText) = true ) {
+                //the CHOSEN CSS class is added to the selected letter's keyboard button
+                button.classList.add('chosen');
+                //the 'showMatchedLetter()' method is called on the phrase 
+                this.activePhrase.showMatchedLetter(button.innerText);
+                //the 'checkForWin()'method is called
+                if(this.checkForWin() === true) {
+                    //the 'gameOver()' method is called
+                    this.gameOver();
+                }      
+            //if the button clicked by the player does not match a letter in the phrase       
+            } else if(this.activePhrase.checkLetter(button.innerText) === false) {
+                //the 'removeLie()' method is called
+                this.removeLife()
                 //the WRONG CSS class is added to the selected letter's keyboard button 
                 value.classList.add('wrong');
-                //the 'removeLife()' method is called
-                this.removeLife();
-           
-            //if the button clicked by the player does match a letter in the phrase 
-            } else if(value.checkLetter() = true) {  
-                //the CHOSEN CSS class is added to the selected letter's keyboard button 
-                value.classList.remove('wrong');
-                value.classList.add('chosen');
-                //the 'showMatchedLetter()' method is called on the phrase 
-                Phrase.showMatchedLetter();
-                //the 'checkForWin()'method is called
-                this.checkForWin();
-                    //if the player has won the game 
-                    if(this.checkLetter() = true) {
-                        //the 'gameOver()' method is called
-                        this.gameOver();
-                    } else {
-                        return false;
-                    }   
+                value.classList.remove('chosen');
 
-            }            
+            } 
         }
-
+             
         //add a method and call it 'checkForWin()' method  
         checkForWin() {
             //this method checks if the player has revealed all the letters in the 'activePhrase'

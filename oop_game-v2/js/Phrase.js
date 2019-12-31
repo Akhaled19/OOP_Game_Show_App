@@ -15,12 +15,11 @@ class Phrase {
         //each letter is represented by an empty box, one li element for each letter
         for(let i = 0; i < this.phrase.length; i ++) {
             if(this.phrase[i] !== "") {
-                liBoxs.classList.add('hide letter');
+                liBoxs.className = 'hide';
                 phrasediv.appendChild(liBoxs);
                 
             } else {
-                liBoxs.classList.remove('hide letter');
-                liBoxs.classList.add('space');
+                liBoxs.className= 'space';
                 phrasediv.appendChild(liBoxs);
             }
 
@@ -33,17 +32,17 @@ class Phrase {
             return true;
         } else {
             return false;
-        }
+        } 
     }        
     // add a third method and call it 'showMatchedLetter()'
     showMatchedLetter(letter) {
         //this method reveals the letter(s) on the board that matches the player's section
         //select all the of the letter DOM elements that have a CSS class name that matches the selected letter
-        matchedLetter = document.getElementsByClassName('letter');
+       let matchedLetter = document.getElementsByClassName('letter');
         for(let i = 0; i < matchedLetter.length; i++) {
-            if(matchedLetter[i].innerHTML === key ) {
+            if(matchedLetter[i].innerHTML === letter ) {
                 //and replace each selected element's hide CSS class with the show CSS class 
-                matchedLetter[i].classList.remove('hide letter');
+                matchedLetter[i].classList.remove('hide');
                 matchedLetter[i].classList.add('show');
             }    
 
