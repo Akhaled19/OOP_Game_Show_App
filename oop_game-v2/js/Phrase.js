@@ -9,11 +9,11 @@ class Phrase {
     }    
     //add a method and call it 'addPhraseToDisplay()'
     addPhraseToDisplay() {
-        //this method adds the letter placeholder to display when game starts
-       let phrasediv = document.getElementById('phrase').firstElementChild;
-       let liBoxs = document.createElement('li');
+        //this method adds the letter placeholder to display when game starts 
         //each letter is represented by an empty box, one li element for each letter
         for(let i = 0; i < this.phrase.length; i ++) {
+            let phrasediv = document.getElementById('phrase').firstElementChild;
+            let liBoxs = document.createElement('li');
             if(this.phrase[i] !== "") {
                 liBoxs.className = 'hide';
                 phrasediv.appendChild(liBoxs);
