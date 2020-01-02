@@ -52,7 +52,7 @@ class Game {
             button.setAttribute("disabled", true);
 
             //if the button clicked by the player does match a letter in the phrase
-            if(this.activePhrase.checkLetter(button.innerText) = true ) {
+            if(this.activePhrase.checkLetter(button.innerText) === true ) {
                 //the CHOSEN CSS class is added to the selected letter's keyboard button
                 button.classList.add('chosen');
                 //the 'showMatchedLetter()' method is called on the phrase 
