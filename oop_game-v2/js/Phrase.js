@@ -30,9 +30,10 @@ class Phrase {
         }
     }    
     //add a second method and call it 'checkLetter()' 
-    checkLetter(key) {
+    checkLetter(letter) {
         //this method checks if a letter is in the phrase
-        if(this.phrase.includes(key)) {
+        const matchedLetter = this.phrase.includes(letter);
+        if(matchedLetter !== undefined) {
             return true;
         } else {
             return false;
