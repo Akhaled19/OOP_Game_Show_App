@@ -26,9 +26,6 @@ screenKeyboard.addEventListener('click', (e) => {
 });
 
 
-//disable event listen on anywhere besides onscreen keyboard buttons
-    //clicking the spaces between and around the onscreen keyboard buttons does not result in the handleInteraction() method being called 
-
 //if game is completed 
     //gameboard is reset
     //clicking the 'start game' button loads a new game

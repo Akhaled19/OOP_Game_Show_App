@@ -77,8 +77,8 @@ class Game {
         //add a method and call it 'removeLife()' 
         removeLife() {
             //this method removes a life from the scoreboard, increments the missed property (one of the liveHeart.png images is replaced with a lostHeart.png image)   
-            const scoreboard = document.querySelectorAll('img');
-            for (let i = 0; i < scoreboard.length; i++) {
+            const scoreboard = document.getElementsByClassName('tries');
+            for (let i = 0; i < scoreboard[i].length; i++) {
                 scoreboard[i].src.replace('liveHeart.png', 'lostHeart.png');
                 return this.missed++
             }
