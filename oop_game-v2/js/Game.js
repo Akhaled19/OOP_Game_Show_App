@@ -1,16 +1,16 @@
 //Global Variables 
 
-// Game class
+// Game class (1) contains methods for starting and ending the game, (2) handles interactions, (3) gets random phrases 
+    // (4) checks for a win, (5) and removes a life from the scoreboard  
 class Game {
-    //add a constructor,
     constructor () { 
-        //initialize 'missed' property and set it to 0
+        //tracks the number of missed guesses by the player
         this.missed = 0;
 
-        //initialize 'phrase' property and set it to an array [] of five Phrase objects
+        //an array [] to store phrases 
         this.phrase = this.phraseMaker(); 
 
-        //initialize 'activePhrase' property and set it to null 
+        //The phrase object that is currently in play
         this.activePhrase = null;
     }    
 
@@ -23,32 +23,33 @@ class Game {
                new Phrase("callback function"),
                new Phrase("anonymous function")
            ];
-         return phrases;
+           //return the function by calling the phrases array
+           return phrases;
         };
 
-        // add a method and call it 'getRandomPhrase()'
-        getRandomPhrase() {
-            //this method randomly retrieves one phrase from the phrases array
+        //this method randomly retrieves one phrase from the phrases array
+        getRandomPhrase() { 
             let randomPhrase = this.phrase[Math.floor(Math.random() * this.phrase.length)];
+            //return the function by calling the randomPhrase variable
             return randomPhrase;   
         }
 
-        // add a method  and call it 'startGame()'
-        startGame() {
-            //this method hides the start screen overlay 
+        //this method (1) hides the start screen overlay, (2) sets the 'activePhrase' property to a random phrase 
+            //(3) and adds that phrase to the board 
+        startGame() {   
             const startScreen = document.getElementById("overlay");
             startScreen.style.display = 'none'
 
-            //this method sets the 'activePhrase' property to a random phrase 
             let word = this.getRandomPhrase();
+
             //this returns an object (phrase), which then allows me to call that object's display method
             this.activePhrase = word;
             word.addPhraseToDisplay();
         }    
  
-        // add a method and call it 'handleInteraction()' & pass in a 'button' property 
+        //this method controls most of the game logic 
         handleInteraction(button) {
-            //this method disables the selected letter's onscreen keyboard button 
+            //(1) Disables the selected letter's onscreen keyboard button
             button.setAttribute("disabled", true);
 
             //if the button clicked by the player does match a letter in the phrase
@@ -73,13 +74,14 @@ class Game {
             } 
         }
              
-
-        //add a method and call it 'removeLife()' 
+        //this method removes a life from the scoreboard
         removeLife() {
-            //this method removes a life from the scoreboard, increments the missed property (one of the liveHeart.png images is replaced with a lostHeart.png image)   
-            const scoreboard = document.getElementsByClassName('tries');
+            //selects the scoreboard div   
+            const scoreboard = document.getElementsById('scoreboard');
             for (let i = 0; i < scoreboard[i].length; i++) {
+                //one of the liveHeart.png images is replaced with a lostHeart.png image
                 scoreboard[i].src.replace('liveHeart.png', 'lostHeart.png');
+                //increments the missed property
                 return this.missed++
             }
             //if the player has lost the game 
@@ -89,23 +91,28 @@ class Game {
             }    
         } 
 
-        //add a method and call it 'checkForWin()' method  
+        //this method checks if the player has revealed all the letters in the 'activePhrase'
         checkForWin() {
-            //this method checks if the player has revealed all the letters in the 'activePhrase'
+            //select all the letters in the activePhrase with a class name 'hide'
             const hiddenLetters = this.activePhrase.classList.contains('hide');
+            //selects all the letters in the activePhrase with a class name 'show'
             const shownLetters = this.activePhrase.classList.contains('show');
+            //if the hidden letters length equals to the activePhrase letters length
             if(hiddenLetters.length === game.activePhrase.phrase.replace(/\s+/g, '').length) {
+                //keep the game going
                 return false;
+            //if the shown letters length equals to the activePhrase letters lenght    
             }else if(shownLetters.length === game.activePhrase.phrase.replace(/\s+/g, '').length) {
+                //stop the game, the usr has won
                 return true;
             }
         }
 
-        //add a method and call it 'gameOver()' 
+        //this method deals with updating the screen after each game
         gameOver() {
             //showing the original start screen overlay
             startScreen.style.display = '';
-            //this method displays a final 'win' or 'loss' message and updating overlay screen
+            //this method displays a final 'win' or 'loss' message and updates overlay screen with CSS class
             const h1 = document.getElementById('game-over-message');
             if (this.missed < 4) {
                 h1.innerHTML = "Game over";

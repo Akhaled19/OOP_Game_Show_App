@@ -1,15 +1,14 @@
 //Global Variables 
 
-//Phrase class 
+//Phrase class handle the creation of phrases 
 class Phrase {
-    //add a constructor, and pass in 'phrase' parameter
     constructor(phrase) {
         //initialize a 'phrase' property set to the phrase and converted to all lower case
         this.phrase = phrase.toLowerCase();
-    }    
-    //add a method and call it 'addPhraseToDisplay()'
+    }   
+
+    //this method adds the letter and space placeholder to display when game starts 
     addPhraseToDisplay() {
-        //this method adds the letter placeholder to display when game starts 
         let phrasediv = document.getElementById('phrase').firstElementChild;
         //each letter is represented by an empty box, one li element for each letter
         for(let i = 0; i < this.phrase.length; i ++) {
@@ -29,9 +28,9 @@ class Phrase {
 
         }
     }    
-    //add a second method and call it 'checkLetter()' 
-    checkLetter(letter) {
-        //this method checks if a letter is in the phrase
+    //this method checks if a letter is in the phrase
+    checkLetter(letter) {  
+        //
         const matchedLetter = this.phrase.includes(letter);
         if(matchedLetter !== undefined) {
             return true;
@@ -39,11 +38,10 @@ class Phrase {
             return false;
         } 
     }        
-    // add a third method and call it 'showMatchedLetter()'
+     //this method reveals the letter(s) on the board that matches the player's section
     showMatchedLetter(letter) {
-        //this method reveals the letter(s) on the board that matches the player's section
         //select all the of the letter DOM elements that have a CSS class name that matches the selected letter
-       let matchedLetter = document.getElementsByClassName('letter');
+        let matchedLetter = document.getElementsByClassName('letter');
         for(let i = 0; i < matchedLetter.length; i++) {
             if(matchedLetter[i].innerHTML === letter ) {
                 //and replace each selected element's hide CSS class with the show CSS class 
