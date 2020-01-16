@@ -16,7 +16,7 @@ class Game {
 
         //method  that creates phrases 
         phraseMaker() {
-           let phrases = [
+           const phrases = [
                new Phrase("filter method"),
                new Phrase("getter method"),
                new Phrase("object interaction"),
@@ -29,7 +29,7 @@ class Game {
 
         //this method randomly retrieves one phrase from the phrases array
         getRandomPhrase() { 
-            let randomPhrase = this.phrase[Math.floor(Math.random() * this.phrase.length)];
+            const randomPhrase = this.phrase[Math.floor(Math.random() * this.phrase.length)];
             //return the function by calling the randomPhrase variable
             return randomPhrase;   
         }
@@ -37,14 +37,10 @@ class Game {
         //this method (1) hides the start screen overlay, (2) sets the 'activePhrase' property to a random phrase 
             //(3) and adds that phrase to the board 
         startGame() {   
-            const startScreen = document.getElementById("overlay");
-            startScreen.style.display = 'none'
+           document.getElementById("overlay").style.display = 'none'
 
-            let word = this.getRandomPhrase();
-
-            //this returns an object (phrase), which then allows me to call that object's display method
-            this.activePhrase = word;
-            word.addPhraseToDisplay();
+            this.activePhrase = this.getRandomPhrase();
+            this.activePhrase.addPhraseToDisplay(); 
         }    
  
         //this method controls most of the game logic 
@@ -55,30 +51,31 @@ class Game {
             //if the button clicked by the player does match a letter in the phrase
             if(this.activePhrase.checkLetter(button.innerText) === true ) {
                 //the CHOSEN CSS class is added to the selected letter's keyboard button
-                button.classList.add('chosen');
+                button.className = 'chosen';
                 //the 'showMatchedLetter()' method is called on the phrase 
                 this.activePhrase.showMatchedLetter(button.innerText);
-                //the 'checkForWin()'method is called
-                if(this.checkForWin() === true) {
-                    //the 'gameOver()' method is called
-                    this.gameOver();
-                }      
+                  
             //if the button clicked by the player does not match a letter in the phrase       
-            } else if(this.activePhrase.checkLetter(button.innerText) === false) {
+            } else {
                 //the 'removeLie()' method is called
                 this.removeLife()
                 //the WRONG CSS class is added to the selected letter's keyboard button 
-                button.classList.add('wrong');
-                button.classList.remove('chosen');
+                button.className = 'wrong';
 
             } 
+            //if all letters  in the phrase are set to show - win
+            if(this.checkForWin()) {
+                //the 'gameOver()' method is called
+                this.gameOver(true);
+            }  
         }
              
         //this method removes a life from the scoreboard
         removeLife() {
             //selects the scoreboard div   
             const scoreboard = document.getElementsById('scoreboard');
-            for (let i = 0; i < scoreboard[i].length; i++) {
+            const arrayScoreBoard = scoreboard.map(heart => heart.innerHTML);
+            for (let i = 0; i < arrayScoreBoard[i].length; i++) {
                 //one of the liveHeart.png images is replaced with a lostHeart.png image
                 scoreboard[i].src.replace('liveHeart.png', 'lostHeart.png');
                 //increments the missed property
@@ -93,10 +90,13 @@ class Game {
 
         //this method checks if the player has revealed all the letters in the 'activePhrase'
         checkForWin() {
+            console.log(this.phrases);
+            const arrayActivePhrase = this.phrases.map(item => item.phrase);
             //select all the letters in the activePhrase with a class name 'hide'
-            const hiddenLetters = this.activePhrase.classList.contains('hide');
+            
+            const hiddenLetters = arrayActivePhrase.classList.includes('hide');
             //selects all the letters in the activePhrase with a class name 'show'
-            const shownLetters = this.activePhrase.classList.contains('show');
+            const shownLetters = arrayActivePhrase.classList.includes('show');
             //if the hidden letters length equals to the activePhrase letters length
             if(hiddenLetters.length === game.activePhrase.phrase.replace(/\s+/g, '').length) {
                 //keep the game going
@@ -111,7 +111,7 @@ class Game {
         //this method deals with updating the screen after each game
         gameOver() {
             //showing the original start screen overlay
-            startScreen.style.display = '';
+            startScreen.style.display = 'block';
             //this method displays a final 'win' or 'loss' message and updates overlay screen with CSS class
             const h1 = document.getElementById('game-over-message');
             if (this.missed < 4) {

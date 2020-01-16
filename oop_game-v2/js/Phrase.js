@@ -45,8 +45,7 @@ class Phrase {
         for(let i = 0; i < matchedLetter.length; i++) {
             if(matchedLetter[i].innerHTML === letter ) {
                 //and replace each selected element's hide CSS class with the show CSS class 
-                matchedLetter[i].classList.remove('hide');
-                matchedLetter[i].classList.add('show');
+                matchedLetter[i].className = 'show';
             }    
 
         }
