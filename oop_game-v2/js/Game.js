@@ -8,7 +8,7 @@ class Game {
         this.missed = 0;
 
         //an array [] to store phrases 
-        this.phrase = this.phraseMaker(); 
+        this.phrases = this.phraseMaker(); 
 
         //The phrase object that is currently in play
         this.activePhrase = null;
@@ -29,7 +29,7 @@ class Game {
 
         //this method randomly retrieves one phrase from the phrases array
         getRandomPhrase() { 
-            const randomPhrase = this.phrase[Math.floor(Math.random() * this.phrase.length)];
+            const randomPhrase = this.phrases[Math.floor(Math.random() * this.phrases.length)];
             //return the function by calling the randomPhrase variable
             return randomPhrase;   
         }
@@ -41,6 +41,7 @@ class Game {
 
             this.activePhrase = this.getRandomPhrase();
             this.activePhrase.addPhraseToDisplay(); 
+            console.log(this.activePhrase);
         }    
  
         //this method controls most of the game logic 
@@ -49,18 +50,20 @@ class Game {
             button.setAttribute("disabled", true);
 
             //if the button clicked by the player does match a letter in the phrase
-            if(this.activePhrase.checkLetter(button.innerText) === true ) {
+            if(this.activePhrase.checkLetter(button.innerText)) {
                 //the CHOSEN CSS class is added to the selected letter's keyboard button
-                button.className = 'chosen';
+                button.className = ('chosen');
                 //the 'showMatchedLetter()' method is called on the phrase 
                 this.activePhrase.showMatchedLetter(button.innerText);
+                console.log(`button is: ${button}`);
                   
             //if the button clicked by the player does not match a letter in the phrase       
             } else {
                 //the 'removeLie()' method is called
                 this.removeLife()
                 //the WRONG CSS class is added to the selected letter's keyboard button 
-                button.className = 'wrong';
+                button.className = ('wrong');
+                console.log(`button is: , ${button}`);
 
             } 
             //if all letters  in the phrase are set to show - win
@@ -90,10 +93,10 @@ class Game {
 
         //this method checks if the player has revealed all the letters in the 'activePhrase'
         checkForWin() {
-            console.log(this.phrases);
-            const arrayActivePhrase = this.phrases.map(item => item.phrase);
+            const activePhraseDomElement = document.querySelectorAll('div #phrase .section');
+            activePhraseDomElement 
             //select all the letters in the activePhrase with a class name 'hide'
-            
+            console.log(`pheases is ${this.phrases}`);
             const hiddenLetters = arrayActivePhrase.classList.includes('hide');
             //selects all the letters in the activePhrase with a class name 'show'
             const shownLetters = arrayActivePhrase.classList.includes('show');

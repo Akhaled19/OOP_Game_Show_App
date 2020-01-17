@@ -9,24 +9,27 @@ class Phrase {
 
     //this method adds the letter and space placeholder to display when game starts 
     addPhraseToDisplay() {
-        let phrasediv = document.getElementById('phrase').firstElementChild;
+        let phraseUl = document.getElementById('phrase').firstElementChild;
         //each letter is represented by an empty box, one li element for each letter
         for(let i = 0; i < this.phrase.length; i ++) {
-            let liBoxs = document.createElement('li');
+            let liBox = document.createElement('li');
             let character = this.phrase[i];
-            if(this.phrase[i] !== "") {
+            if(this.phrase[i] !== " ") {
                 //each element you create for a letter should have the following classes
                 //hide,letter, & a class representing the letter itself  
-                liBoxs.innerHTML = `<li class="hide letter ${character}">${character}</li>`        
-                phrasediv.appendChild(liBoxs);
+                liBox.className = ('hide letter ' + character);  
+                liBox.textContent = character;      
                 
             } else {
                 //Each element created for a space, should have the class of "space" 
-                liBoxs.innerHTML= '<li class="space"></li>';
-                phrasediv.appendChild(liBoxs);
+                liBox.className= ('space');
+                
             }
+            phraseUl.append(liBox);
+            console.log(liBox);
 
         }
+        
     }    
     //this method checks if a letter is in the phrase
     checkLetter(letter) {  
