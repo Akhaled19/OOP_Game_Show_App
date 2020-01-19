@@ -50,19 +50,19 @@ class Game {
             button.setAttribute("disabled", true);
 
             //if the button clicked by the player does match a letter in the phrase
-            if(this.activePhrase.checkLetter(button.textContent)) {
+            if(this.activePhrase.checkLetter(button.innerHTML === true)) {
                 //the CHOSEN CSS class is added to the selected letter's keyboard button
                 button.className = ('chosen');
                 //the 'showMatchedLetter()' method is called on the phrase 
-                this.activePhrase.showMatchedLetter(button.innerText);
+                this.activePhrase.showMatchedLetter(button.textContent);
                 console.log(`button is: ${button}`);
                   
             //if the button clicked by the player does not match a letter in the phrase       
-            } else if (this.activePhrase.checkLetter(button.textContent === false)) {
-                //the 'removeLie()' method is called
-                this.removeLife()
+            } else if (this.activePhrase.checkLetter(button.innerHTML === false)) {
                 //the WRONG CSS class is added to the selected letter's keyboard button 
                 button.className = ('wrong');
+                //the 'removeLie()' method is called
+                this.removeLife()
                 console.log(`button is: , ${button}`);
 
             } 
@@ -76,20 +76,20 @@ class Game {
         //this method removes a life from the scoreboard
         removeLife() {
             //selects the scoreboard div   
-            const scoreboardDomNodes = document.querySelectorAll('div #scoreboard ol li');
-            const arrayScoreBoard = [...scoreboardDomNodes].map(heart => heart.innerHTML);
-            for (let i = 0; i < arrayScoreBoard[i].length; i++) {
+            const scoreboardDomNodes = document.querySelectorAll('.tries');
+            //const arrayScoreBoard = [...scoreboardDomNodes].map(heart => heart.innerHTML);
+            for (let i = 0; i < scoreboardDomNodes[i].length; i++) {
                 //one of the liveHeart.png images is replaced with a lostHeart.png image
-                arrayScoreBoard[i].src.replace('liveHeart.png', 'lostHeart.png');
+                scoreboardDomNodes[i].src.replace('liveHeart.png', 'lostHeart.png');
                 //increments the missed property
                 return this.missed += 1
             }
-            console.log(`missed count: ${arrayScoreBoard}`);
+            console.log(`missed count: ${scoreboardDomNodes}`);
             //if the player has lost the game 
-           // if(this.missed < 4 ) {
+           if(this.missed < 4 ) {
                 //call the gameOver() method 
-            //    this.gameOver();
-            //}    
+                this.gameOver();
+            }    
         } 
 
         //this method checks if the player has revealed all the letters in the 'activePhrase'
