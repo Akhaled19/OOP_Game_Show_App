@@ -17,16 +17,15 @@ class Phrase {
             if(this.phrase[i] !== " ") {
                 //each element you create for a letter should have the following classes
                 //hide,letter, & a class representing the letter itself  
-                liBox.className = ('hide letter ' + character);  
+                liBox.className = `hide letter ${character}`;  
                 liBox.textContent = character;      
                 
-            } else {
+            } else if(this.phrase[i] === " ") {
                 //Each element created for a space, should have the class of "space" 
                 liBox.className= ('space');
                 
             }
-            phraseUl.append(liBox);
-            console.log(liBox);
+            phraseUl.appendChild(liBox);
 
         }
         

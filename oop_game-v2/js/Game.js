@@ -50,7 +50,7 @@ class Game {
             button.setAttribute("disabled", true);
 
             //if the button clicked by the player does match a letter in the phrase
-            if(this.activePhrase.checkLetter(button.innerText)) {
+            if(this.activePhrase.checkLetter(button.textContent)) {
                 //the CHOSEN CSS class is added to the selected letter's keyboard button
                 button.className = ('chosen');
                 //the 'showMatchedLetter()' method is called on the phrase 
@@ -58,7 +58,7 @@ class Game {
                 console.log(`button is: ${button}`);
                   
             //if the button clicked by the player does not match a letter in the phrase       
-            } else {
+            } else if (this.activePhrase.checkLetter(button.textContent === false)) {
                 //the 'removeLie()' method is called
                 this.removeLife()
                 //the WRONG CSS class is added to the selected letter's keyboard button 
@@ -76,37 +76,38 @@ class Game {
         //this method removes a life from the scoreboard
         removeLife() {
             //selects the scoreboard div   
-            const scoreboard = document.getElementsById('scoreboard');
-            const arrayScoreBoard = scoreboard.map(heart => heart.innerHTML);
+            const scoreboardDomNodes = document.querySelectorAll('div #scoreboard ol li');
+            const arrayScoreBoard = [...scoreboardDomNodes].map(heart => heart.innerHTML);
             for (let i = 0; i < arrayScoreBoard[i].length; i++) {
                 //one of the liveHeart.png images is replaced with a lostHeart.png image
-                scoreboard[i].src.replace('liveHeart.png', 'lostHeart.png');
+                arrayScoreBoard[i].src.replace('liveHeart.png', 'lostHeart.png');
                 //increments the missed property
-                return this.missed++
+                return this.missed += 1
             }
+            console.log(`missed count: ${arrayScoreBoard}`);
             //if the player has lost the game 
-            if(this.missed < 4 ) {
+           // if(this.missed < 4 ) {
                 //call the gameOver() method 
-                this.gameOver();
-            }    
+            //    this.gameOver();
+            //}    
         } 
 
         //this method checks if the player has revealed all the letters in the 'activePhrase'
         checkForWin() {
-            const activePhraseDomElement = document.querySelectorAll('div #phrase .section');
-            activePhraseDomElement 
-            //select all the letters in the activePhrase with a class name 'hide'
-            console.log(`pheases is ${this.phrases}`);
-            const hiddenLetters = arrayActivePhrase.classList.includes('hide');
-            //selects all the letters in the activePhrase with a class name 'show'
-            const shownLetters = arrayActivePhrase.classList.includes('show');
-            //if the hidden letters length equals to the activePhrase letters length
-            if(hiddenLetters.length === game.activePhrase.phrase.replace(/\s+/g, '').length) {
+            //grabbed the phrase div and its ul and lis. This will be used to filter through  
+            const phraseLetterDomNodes = document.querySelectorAll('div #phrase ul li');
+            //filter through the phraseLetterDomNodes array to select only ones with 'hide' class name
+            const hiddenPhraseLetterDomNodes = [...phraseLetterDomNodes].filter(letter => letter.classList.contains('hide'));
+            //after filtering through, we want to read the text content of selected nodes
+            const hiddenPhraseLetters = hiddenPhraseLetterDomNodes.map(hiddenNode => hiddenNode.textContent); 
+            console.log(`the hidden list items: ${hiddenPhraseLetters} ${hiddenPhraseLetterDomNodes}`);
+            //checks if the player won by checking is the length of the hiddenPhraseLetters is greater than 0 or not
+            if(hiddenPhraseLetters.length > 0) {
                 //keep the game going
                 return false;
-            //if the shown letters length equals to the activePhrase letters lenght    
-            }else if(shownLetters.length === game.activePhrase.phrase.replace(/\s+/g, '').length) {
-                //stop the game, the usr has won
+            //if the shown letters length equals to the activePhrase letters length    
+            }else {
+                //stop the game, the player has won
                 return true;
             }
         }
