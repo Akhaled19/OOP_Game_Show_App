@@ -1,4 +1,4 @@
-//Global Variables 
+
 
 //Phrase class handle the creation of phrases 
 class Phrase {
@@ -32,27 +32,27 @@ class Phrase {
     }    
     //this method checks if a letter is in the phrase
     checkLetter(letter) {  
-        //
-        const matchedLetter = this.phrase.includes(letter);
-        if(matchedLetter !== undefined) {
-            return true;
-        } else {
-            return false;
-        } 
-    }        
+        //returns true if letter is included in phrase, returns false if not included
+        return this.phrase.includes(letter);    
+        
+    }  
+
      //this method reveals the letter(s) on the board that matches the player's section
     showMatchedLetter(letter) {
         //select all the of the letter DOM elements that have a CSS class name that matches the selected letter
-        let matchedLetter = document.getElementsByClassName('letter');
-        for(let i = 0; i < matchedLetter.length; i++) {
-            if(matchedLetter[i].innerHTML === letter ) {
+        const listOfLi = document.querySelectorAll('.letter ul li');
+        console.log('the list ' + listOfLi);
+        for(let i = 0; i < listOfLi.length; i++) {
+            let eachLetterLi = [...listOfLi].textContent;
+
+            if(eachLetterLi === letter ) {
                 //and replace each selected element's hide CSS class with the show CSS class 
-                matchedLetter[i].className = 'show';
+                listOfLi[i].className = 'show';
             }    
 
         }
-        //return the function by calling the letter property 
-        return letter;
+        //return the function by calling the matchedLetter 
+        //return listOfLi;
 
     }    
 }
