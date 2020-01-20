@@ -33,7 +33,8 @@ class Phrase {
     //this method checks if a letter is in the phrase
     checkLetter(letter) {  
         //returns true if letter is included in phrase, returns false if not included
-        return this.phrase.includes(letter);    
+    
+        return this.phrase.includes(console.log(letter));    
         
     }  
 
