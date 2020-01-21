@@ -37,7 +37,7 @@ class Game {
         //this method (1) hides the start screen overlay, (2) sets the 'activePhrase' property to a random phrase 
             //(3) and adds that phrase to the board 
         startGame() {   
-           document.getElementById("overlay").style.display = 'none'
+            document.getElementById("overlay").style.display = 'none'
 
             this.activePhrase = this.getRandomPhrase();
             this.activePhrase.addPhraseToDisplay(); 
@@ -76,15 +76,14 @@ class Game {
         //this method removes a life from the scoreboard
         removeLife() {
             //selects the scoreboard div   
-            const scoreboardDomNodes = document.querySelectorAll('.tries');
-            //const arrayScoreBoard = [...scoreboardDomNodes].map(heart => heart.innerHTML);
-            for (let i = 0; i < scoreboardDomNodes[i].length; i++) {
-                //one of the liveHeart.png images is replaced with a lostHeart.png image
-                scoreboardDomNodes[i].src.replace('liveHeart.png', 'lostHeart.png');
-                //increments the missed property
-                return this.missed += 1
-            }
-            console.log(`missed count: ${scoreboardDomNodes}`);
+            const scoreboardDomNodes = [...document.querySelectorAll('#scoreboard li img')];
+
+             //increments the missed property
+             let numberOFMissedTimes = this.missed + 1;
+
+            //one of the liveHeart.png images is replaced with a lostHeart.png image
+            scoreboardDomNodes[numberOFMissedTimes].setAttribute('src', 'images/lostHeart.png');
+               
             //if the player has lost the game 
            if(this.missed < 4 ) {
                 //call the gameOver() method 
@@ -115,16 +114,16 @@ class Game {
         //this method deals with updating the screen after each game
         gameOver() {
             //showing the original start screen overlay
-            startScreen.style.display = 'block';
+            const overlay = document.getElementById("overlay").style.display = 'block'
             //this method displays a final 'win' or 'loss' message and updates overlay screen with CSS class
-            const h1 = document.getElementById('game-over-message');
+            const gameOverMessageH1 = document.getElementById('game-over-message');
             if (this.missed < 4) {
-                h1.innerHTML = "Game over";
-                startGame.classList.add('lose');
+                gameOverMessageH1.textContent = "Game over";
+                overlay.classList.add('lose');
             } else {
-                h1.classList.remove('lose');
-                h1.innerHTML = "Congratulations, you won!";
-                startScreen.classList.add('win');
+                gameOverMessageH1.classList.remove('lose');
+                gameOverMessageH1.textContent = "Congratulations, you won!";
+                overlay.classList.add('win');
             }
         }           
 }
