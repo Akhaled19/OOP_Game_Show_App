@@ -36,7 +36,7 @@ class Phrase {
     checkLetter(letter) {  
         //returns true if letter is included in phrase, returns false if not included
     
-        return this.LettersInPhrase.includes(console.log(letter));    
+        return this.LettersInPhrase.includes(letter);    
         
     }  
 
