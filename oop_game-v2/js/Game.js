@@ -58,7 +58,7 @@ class Game {
                 console.log(`button is: ${button}`);
                   
             //if the button clicked by the player does not match a letter in the phrase       
-            } else if (this.activePhrase.checkLetter(button.innerHTML)) {
+            } else {
                 //the WRONG CSS class is added to the selected letter's keyboard button 
                 button.className = ('wrong');
                 //the 'removeLie()' method is called
