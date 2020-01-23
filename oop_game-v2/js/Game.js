@@ -62,7 +62,7 @@ class Game {
                 //the WRONG CSS class is added to the selected letter's keyboard button 
                 button.className = ('wrong');
                 //the 'removeLie()' method is called
-                this.removeLife()
+                this.removeLife();
                 console.log(`button is: , ${button}`);
 
             } 
@@ -77,17 +77,29 @@ class Game {
         removeLife() {
             //selects the scoreboard div   
             const scoreboardDomNodes = [...document.querySelectorAll('#scoreboard li img')];
-
-             //increments the missed property
-             let numberOFMissedTimes = this.missed + 1;
+             
         
+            for (let i = 0; i < scoreboardDomNodes[i].length; i++) {
+                if (scoreboardDomNodes[i].getAttribute('src') === 'images/liveHeart.png') {
+                    //increments the missed property
+                    this.missed += 1;
+                    //replace live heart with lost heart 
+                    scoreboardDomNodes[i].src = 'images/lostHeart.png';
+                    //break after each run
+                    break;
+                }
+            } console.log(scoreboardDomNodes);
+            
+
+            
             //one of the liveHeart.png images is replaced with a lostHeart.png image
-            scoreboardDomNodes[numberOFMissedTimes].setAttribute('src', 'images/lostHeart.png');
-            console.log('missed ' + this.missed); 
+            //scoreboardDomNodes[numberOFMissedTimes].setAttribute('src', 'images/lostHeart.png');
+           // console.log('missed ' + numberOFMissedTimes); 
             //if the player has lost the game 
-           if(this.missed < 4 ) {
-                //call the gameOver() method 
-                this.gameOver();
+           if(this.missed === 5 ) {
+            //call the gameOver() method 
+            this.gameOver(false);
+            console.log(`missed ${this}`);
             }    
         } 
 
@@ -127,7 +139,7 @@ class Game {
                 gameOverMessageH1.textContent = "Congratulations, you won!";
                 
                 
-            } else if (gameWon === true) {
+            } else if (gameWon === false) {
                 overlay.classList.remove('win');
                 overlay.classList.add('lose');
 
