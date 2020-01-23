@@ -50,7 +50,7 @@ class Game {
             button.setAttribute("disabled", true);
 
             //if the button clicked by the player does match a letter in the phrase
-            if(this.activePhrase.checkLetter(button.innerHTML === true)) {
+            if(this.activePhrase.checkLetter(button.innerHTML)) {
                 //the CHOSEN CSS class is added to the selected letter's keyboard button
                 button.className = ('chosen');
                 //the 'showMatchedLetter()' method is called on the phrase 
@@ -58,7 +58,7 @@ class Game {
                 console.log(`button is: ${button}`);
                   
             //if the button clicked by the player does not match a letter in the phrase       
-            } else if (this.activePhrase.checkLetter(button.innerHTML === false)) {
+            } else if (this.activePhrase.checkLetter(button.innerHTML)) {
                 //the WRONG CSS class is added to the selected letter's keyboard button 
                 button.className = ('wrong');
                 //the 'removeLie()' method is called
@@ -80,10 +80,10 @@ class Game {
 
              //increments the missed property
              let numberOFMissedTimes = this.missed + 1;
-
+        
             //one of the liveHeart.png images is replaced with a lostHeart.png image
             scoreboardDomNodes[numberOFMissedTimes].setAttribute('src', 'images/lostHeart.png');
-               
+            console.log('missed ' + this.missed); 
             //if the player has lost the game 
            if(this.missed < 4 ) {
                 //call the gameOver() method 
@@ -112,18 +112,28 @@ class Game {
         }
 
         //this method deals with updating the screen after each game
-        gameOver() {
+        gameOver(gameWon) {
             //showing the original start screen overlay
-            const overlay = document.getElementById("overlay").style.display = 'block'
+            const overlay = document.getElementById("overlay");
             //this method displays a final 'win' or 'loss' message and updates overlay screen with CSS class
             const gameOverMessageH1 = document.getElementById('game-over-message');
-            if (this.missed < 4) {
-                gameOverMessageH1.textContent = "Game over";
-                overlay.classList.add('lose');
-            } else {
-                gameOverMessageH1.classList.remove('lose');
-                gameOverMessageH1.textContent = "Congratulations, you won!";
+
+            if (gameWon === true) {       
+                overlay.classList.remove('start');
                 overlay.classList.add('win');
+
+                overlay.style.display = "block";
+
+                gameOverMessageH1.textContent = "Congratulations, you won!";
+                
+                
+            } else if (gameWon === true) {
+                overlay.classList.remove('win');
+                overlay.classList.add('lose');
+
+                overlay.style.display = "block";
+
+                gameOverMessageH1.textContent = "Game over! You ran out of lives.";
             }
         }           
 }

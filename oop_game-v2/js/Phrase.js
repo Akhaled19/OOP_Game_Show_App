@@ -5,8 +5,8 @@ class Phrase {
     constructor(phrase) {
         //initialize a 'phrase' property set to the phrase and converted to all lower case
         this.phrase = phrase.toLowerCase();
-
         this.LettersInPhrase = this.phrase.split("");
+
     }   
 
     //this method adds the letter and space placeholder to display when game starts 
@@ -15,16 +15,16 @@ class Phrase {
         //each letter is represented by an empty box, one li element for each letter
         for(let i = 0; i < this.LettersInPhrase.length; i++) {
             let liBox = document.createElement('li');
-            let character = this.LettersInPhrase[i];
+            let character = this.phrase[i];
             if(this.LettersInPhrase[i] !== " ") {
                 //each element you create for a letter should have the following classes
                 //hide,letter, & a class representing the letter itself  
                 liBox.className = `hide letter ${character}`;  
                 liBox.innerText = character;      
                 
-            } else if(this.LettersInPhrase[i] === " ") {
+            } else {
                 //Each element created for a space, should have the class of "space" 
-                liBox.className= ('space');
+                liBox.className= 'space';
                 
             }
             phraseUl.appendChild(liBox);
@@ -42,10 +42,10 @@ class Phrase {
 
      //this method reveals the letter(s) on the board that matches the player's section
     showMatchedLetter(clickedLetter) {
-        
-        LettersInPhrase.forEach(letter, index => {
-            if(clickedLetter === letter)
-            this.LettersInPhrase[index].className = 'show';
+        const phraseLi = [...document.querySelectorAll("#phrase ul li")];
+        phraseLi.map(letter => {
+            if(letter.innerText === clickedLetter)
+            letter.className = `show letter  ${clickedLetter}`;
             
         });
         //(let i = 0; i < listOfLi.length; i++) {
