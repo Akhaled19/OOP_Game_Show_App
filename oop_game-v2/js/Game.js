@@ -63,7 +63,6 @@ class Game {
                 button.className = ('wrong');
                 //the 'removeLie()' method is called
                 this.removeLife();
-                console.log(`button is: , ${button}`);
 
             } 
             //if all letters  in the phrase are set to show - win
@@ -77,9 +76,10 @@ class Game {
         removeLife() {
             //selects the scoreboard div   
             const scoreboardDomNodes = [...document.querySelectorAll('#scoreboard li img')];
-             
+            
         
-            for (let i = 0; i < scoreboardDomNodes[i].length; i++) {
+            for (let i = 0; i < scoreboardDomNodes.length; i++) {
+                console.log(scoreboardDomNodes);
                 if (scoreboardDomNodes[i].getAttribute('src') === 'images/liveHeart.png') {
                     //increments the missed property
                     this.missed += 1;
@@ -88,19 +88,13 @@ class Game {
                     //break after each run
                     break;
                 }
-            } console.log(scoreboardDomNodes);
-            
-
-            
-            //one of the liveHeart.png images is replaced with a lostHeart.png image
-            //scoreboardDomNodes[numberOFMissedTimes].setAttribute('src', 'images/lostHeart.png');
-           // console.log('missed ' + numberOFMissedTimes); 
+            } 
             //if the player has lost the game 
            if(this.missed === 5 ) {
             //call the gameOver() method 
             this.gameOver(false);
-            console.log(`missed ${this}`);
-            }    
+            console.log(`missed ${this.missed}`)
+           }    
         } 
 
         //this method checks if the player has revealed all the letters in the 'activePhrase'
