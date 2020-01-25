@@ -25,12 +25,14 @@ screenKeyboard.addEventListener('click', (e) => {
 
 });
 
-
-//if game is completed 
-    //gameboard is reset
-    //clicking the 'start game' button loads a new game
+//Restarts the game between games 
+screenKeyboard.addEventListener(click, (e) => {
+    //removes all li elements from the phrase ul element
+    //enables all of the onscreen beyboard button 
+    //updates each key with the key class
+    //resets all the heart images 
+});
     
- 
 //notes//
 //MUST use HTML and CSS 
 //MUST personalize the App styles & noted in the README.md file     
