@@ -9,8 +9,11 @@ startGameButton.addEventListener('click', () => {
 //w/keyup or keydown = pressing a physical keyboard button results in the 'handleInteraction()' method being called for the associated onscreen keyboard button
     //creates a new game object  
     game = new Game();
+    //reset the game
+    game.restart();
      //starts the game 
     game.startGame();
+    
 }); 
 
 //add a click event to each of the onscreen keyboard buttons = user interaction

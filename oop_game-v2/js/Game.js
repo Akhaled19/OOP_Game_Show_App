@@ -141,20 +141,23 @@ class Game {
 
                 gameOverMessageH1.textContent = "Game over! You ran out of lives.";
             }
+           
         }    
         
         //Restarts the game between games 
         restart() {
                 //removes all li elements from the phrase ul element
                 const phraseUl = document.querySelectorAll('#phrase ul');
-                while (phraseUl.hasChildNodes()) {
+                console.log(phraseUl);
+                while (phraseUl.hasChildNodes) {
+                    console.log(phraseUl.firstChild);
                     phraseUl.removeChild(phraseUl.firstChild);
                 }
                 
                 //enables each key on the beyboard & updates each key with the key class
-                const keysArray = [...document.querySelectorAll('#qwerty')]; 
+                const keysArray = [...document.querySelectorAll('.key')]; 
                 keysArray.forEach(key => {
-                    key.setAttribute("disabled", false);
+                    //key.setAttribute("disabled", false);
                     key.className = 'key';
                 });
 
