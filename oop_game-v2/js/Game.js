@@ -157,9 +157,12 @@ class Game {
                     key.setAttribute("disabled", false);
                     key.className = 'key';
                 });
-                
-                //
+
                 //resets all the heart images 
+                const heartArray = [...document.querySelectorAll('#scoreboard li img')];
+                heartArray.forEach(heart => {
+                    heart.src = 'images/liveHeart.png';
+                });
         }; 
 
 }
