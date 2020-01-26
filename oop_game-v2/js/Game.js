@@ -52,7 +52,7 @@ class Game {
             //if the button clicked by the player does match a letter in the phrase
             if(this.activePhrase.checkLetter(button.innerHTML)) {
                 //the CHOSEN CSS class is added to the selected letter's keyboard button
-                button.className = ('chosen');
+                button.className = 'chosen';
                 //the 'showMatchedLetter()' method is called on the phrase 
                 this.activePhrase.showMatchedLetter(button.textContent);
                 console.log(`button is: ${button}`);
@@ -60,7 +60,7 @@ class Game {
             //if the button clicked by the player does not match a letter in the phrase       
             } else {
                 //the WRONG CSS class is added to the selected letter's keyboard button 
-                button.className = ('wrong');
+                button.className = 'wrong';
                 //the 'removeLie()' method is called
                 this.removeLife();
 
@@ -141,6 +141,26 @@ class Game {
 
                 gameOverMessageH1.textContent = "Game over! You ran out of lives.";
             }
-        }           
+        }    
+        
+        //Restarts the game between games 
+        restart() {
+                //removes all li elements from the phrase ul element
+                const phraseUl = document.querySelectorAll('#phrase ul');
+                while (phraseUl.hasChildNodes()) {
+                    phraseUl.removeChild(phraseUl.firstChild);
+                }
+                
+                //enables each key on the beyboard & updates each key with the key class
+                const keysArray = [...document.querySelectorAll('#qwerty')]; 
+                keysArray.forEach(key => {
+                    key.setAttribute("disabled", false);
+                    key.className = 'key';
+                });
+                
+                //
+                //resets all the heart images 
+        }; 
+
 }
 
