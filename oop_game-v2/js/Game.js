@@ -1,6 +1,5 @@
-//Global Variables 
 
-// Game class (1) contains methods for starting and ending the game, (2) handles interactions, (3) gets random phrases 
+// Game class contains (1) methods for starting and ending the game, (2) handles interactions, (3) gets random phrases 
     // (4) checks for a win, (5) and removes a life from the scoreboard  
 class Game {
     constructor () { 
@@ -14,7 +13,7 @@ class Game {
         this.activePhrase = null;
     }    
 
-        //method  that creates phrases 
+        //method  that creates phrases (array of objects) 
         phraseMaker() {
            const phrases = [
                new Phrase("filter method"),
@@ -41,19 +40,19 @@ class Game {
 
             this.activePhrase = this.getRandomPhrase();
             this.activePhrase.addPhraseToDisplay(); 
-            console.log(this.activePhrase);
+            //console.log(this.activePhrase);
         }    
  
         //this method controls most of the game logic 
         handleInteraction(button) {
-            //(1) Disables the selected letter's onscreen keyboard button
+            //Disables the selected letter's onscreen keyboard button
             button.setAttribute("disabled", true);
 
-            //if the button clicked by the player does match a letter in the phrase
+            //If the button clicked by the player match a letter in the activePhrase
             if(this.activePhrase.checkLetter(button.innerHTML)) {
                 //the CHOSEN CSS class is added to the selected letter's keyboard button
                 button.className = 'chosen';
-                //the 'showMatchedLetter()' method is called on the phrase 
+                //and the button is revealed
                 this.activePhrase.showMatchedLetter(button.textContent);
                 //console.log(`button is: ${button}`);
                   
@@ -61,25 +60,26 @@ class Game {
             } else {
                 //the WRONG CSS class is added to the selected letter's keyboard button 
                 button.className = 'wrong';
-                //the 'removeLie()' method is called
+                //a life is removed
                 this.removeLife();
 
             } 
-            //if all letters  in the phrase are set to show - win
+            //if all letters  in the phrase are set to show CSS class
             if(this.checkForWin()) {
-                //the 'gameOver()' method is called
+                //player won
                 this.gameOver(true);
             }  
         }
              
         //this method removes a life from the scoreboard
         removeLife() {
-            //selects the scoreboard div   
+            //selects the scoreboard div and its list of images and stores them in an array   
             const scoreboardDomNodes = [...document.querySelectorAll('#scoreboard li img')];
             
-        
+            //loops through the scoreboard array
             for (let i = 0; i < scoreboardDomNodes.length; i++) {
                 console.log(scoreboardDomNodes);
+                //and checks if the img is live heart
                 if (scoreboardDomNodes[i].getAttribute('src') === 'images/liveHeart.png') {
                     //increments the missed property
                     this.missed += 1;
@@ -93,7 +93,7 @@ class Game {
            if(this.missed === 5 ) {
             //call the gameOver() method 
             this.gameOver(false);
-            console.log(`missed ${this.missed}`)
+            //console.log(`missed ${this.missed}`)
            }    
         } 
 
@@ -101,12 +101,14 @@ class Game {
         checkForWin() {
             //grabbed the phrase div and its ul and lis. This will be used to filter through  
             const phraseLetterDomNodes = document.querySelectorAll('div #phrase ul li');
+
             //filter through the phraseLetterDomNodes array to select only ones with 'hide' class name
             const hiddenPhraseLetterDomNodes = [...phraseLetterDomNodes].filter(letter => letter.classList.contains('hide'));
+
             //after filtering through, we want to read the text content of selected nodes
             const hiddenPhraseLetters = hiddenPhraseLetterDomNodes.map(hiddenNode => hiddenNode.textContent); 
-            //console.log(`the hidden list items: ${hiddenPhraseLetters} ${hiddenPhraseLetterDomNodes}`);
-            //checks if the player won by checking is the length of the hiddenPhraseLetters is greater than 0 or not
+
+            //checks if the player won: is the length of the hiddenPhraseLetters greater than 0 ?
             if(hiddenPhraseLetters.length > 0) {
                 //keep the game going
                 return false;
@@ -119,11 +121,11 @@ class Game {
 
         //this method deals with updating the screen after each game
         gameOver(gameWon) {
-            //showing the original start screen overlay
+            
             const overlay = document.getElementById("overlay");
-            //this method displays a final 'win' or 'loss' message and updates overlay screen with CSS class
             const gameOverMessageH1 = document.getElementById('game-over-message');
 
+            //this method displays a final 'win' or 'loss' message and updates overlay screen with CSS class
             if (gameWon === true) {       
                 overlay.classList.remove('start');
                 overlay.classList.add('win');
@@ -136,7 +138,6 @@ class Game {
             } else if (gameWon === false) {
                 overlay.classList.remove('win');
                 overlay.classList.add('lose');
-                console.log('color: ' + overlay.classList);
 
                 overlay.style.display = "block";
 
@@ -147,23 +148,29 @@ class Game {
         
         //Restarts the game between games 
         restart() {
-                //removes all li elements from the phrase ul element
+                //grabs the phrase div's url
                 const phraseUl = document.querySelector(' #phrase ul ');
-                console.log(phraseUl);
+                //console.log(phraseUl);
+
+                //removes all li elements from the phrase ul element
                 while (phraseUl.firstChild) {
                     phraseUl.removeChild(phraseUl.firstChild);
                     console.log(phraseUl.firstChild);
                 }
                 
-                //enables each key on the beyboard & updates each key with the key class
+                //grabs all keyrow div's buttons and stores them in an array
                 const keysArray = [...document.querySelectorAll('.keyrow button')]; 
+
+                //enables each button on the beyboard & updates each button with the key class
                 keysArray.forEach(button => {
                     button.removeAttribute("disabled", true);
                     button.className = 'key';
                 });
 
-                //resets all the heart images 
+                //grabs all imgs in the scoreboard and stores them in an array
                 const heartArray = [...document.querySelectorAll('#scoreboard li img')];
+
+                //resets all the heart images 
                 heartArray.forEach(heart => {
                     heart.src = 'images/liveHeart.png';
                 });

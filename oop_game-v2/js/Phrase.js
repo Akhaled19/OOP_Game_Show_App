@@ -12,6 +12,7 @@ class Phrase {
     //this method adds the letter and space placeholder to display when game starts 
     addPhraseToDisplay() {
         let phraseUl = document.getElementById('phrase').firstElementChild;
+
         //each letter is represented by an empty box, one li element for each letter
         for(let i = 0; i < this.LettersInPhrase.length; i++) {
             let liBox = document.createElement('li');
@@ -23,7 +24,7 @@ class Phrase {
                 liBox.innerText = character;      
                 
             } else {
-                //Each element created for a space, should have the class of "space" 
+                //Each element created for a space, should have the "space" class 
                 liBox.className= 'space';
                 
             }
@@ -34,13 +35,12 @@ class Phrase {
     }    
     //this method checks if a letter is in the phrase
     checkLetter(letter) {  
+
         //returns true if letter is included in phrase, returns false if not included
-    
-        return this.LettersInPhrase.includes(letter);    
-        
+        return this.LettersInPhrase.includes(letter);         
     }  
 
-     //this method reveals the letter(s) on the board that matches the player's section
+    //this method reveals the letter(s) on the board that matches the player's selection
     showMatchedLetter(clickedLetter) {
         const phraseLi = [...document.querySelectorAll("#phrase ul li")];
         phraseLi.map(letter => {
@@ -48,17 +48,7 @@ class Phrase {
             letter.className = `show letter  ${clickedLetter}`;
             
         });
-        //(let i = 0; i < listOfLi.length; i++) {
-        //    let eachLetterLi = [...listOfLi].textContent;
 
-        //    if(eachLetterLi === letter ) {
-                //and replace each selected element's hide CSS class with the show CSS class 
-        //        listOfLi[i].className = 'show';
-        //    }    
-
-    //    }
-        //return the function by calling the matchedLetter 
-        //return listOfLi;
-
-    }    
+    }   
+     
 }

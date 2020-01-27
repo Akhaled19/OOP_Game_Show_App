@@ -1,17 +1,19 @@
 //Global variables 
     //button = Start Game
     const startGameButton = document.getElementById('btn__reset');
+
     //button = keyboard 
     const screenKeyboard = document.getElementById('qwerty');
+
     let game;
+
 //add a click event(keyup or keydown) to button = Start Game
 startGameButton.addEventListener('click', () => {
-//w/keyup or keydown = pressing a physical keyboard button results in the 'handleInteraction()' method being called for the associated onscreen keyboard button
     //creates a new game object  
     game = new Game();
     //reset the game
     game.restart();
-     //starts the game 
+    //starts the game 
     game.startGame();
     
 }); 
@@ -20,7 +22,7 @@ startGameButton.addEventListener('click', () => {
 screenKeyboard.addEventListener('click', (e) => {
     //targe only the buttons 
     const clickedButton = e.target;
-    //if a letter (not the div) was clicked log the button/letter 
+    //if a letter (not the div) was clicked 
     if(clickedButton.getAttribute('class') === 'key') {
         //call the 'handleInteraction()' method on the game object
         game.handleInteraction(clickedButton);
