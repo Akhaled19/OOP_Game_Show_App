@@ -55,7 +55,7 @@ class Game {
                 button.className = 'chosen';
                 //the 'showMatchedLetter()' method is called on the phrase 
                 this.activePhrase.showMatchedLetter(button.textContent);
-                console.log(`button is: ${button}`);
+                //console.log(`button is: ${button}`);
                   
             //if the button clicked by the player does not match a letter in the phrase       
             } else {
@@ -93,7 +93,7 @@ class Game {
            if(this.missed === 5 ) {
             //call the gameOver() method 
             this.gameOver(false);
-            console.log(`missed ${this.missed}`)
+            //console.log(`missed ${this.missed}`)
            }    
         } 
 
@@ -105,7 +105,7 @@ class Game {
             const hiddenPhraseLetterDomNodes = [...phraseLetterDomNodes].filter(letter => letter.classList.contains('hide'));
             //after filtering through, we want to read the text content of selected nodes
             const hiddenPhraseLetters = hiddenPhraseLetterDomNodes.map(hiddenNode => hiddenNode.textContent); 
-            console.log(`the hidden list items: ${hiddenPhraseLetters} ${hiddenPhraseLetterDomNodes}`);
+            //console.log(`the hidden list items: ${hiddenPhraseLetters} ${hiddenPhraseLetterDomNodes}`);
             //checks if the player won by checking is the length of the hiddenPhraseLetters is greater than 0 or not
             if(hiddenPhraseLetters.length > 0) {
                 //keep the game going
@@ -147,18 +147,18 @@ class Game {
         //Restarts the game between games 
         restart() {
                 //removes all li elements from the phrase ul element
-                const phraseUl = document.querySelectorAll('#phrase ul');
-                console.log(phraseUl);
-                while (phraseUl.hasChildNodes) {
-                    console.log(phraseUl.firstChild);
-                    phraseUl.removeChild(phraseUl.firstChild);
+                const phraseLi = [...document.querySelectorAll('ul li')];
+                console.log(phraseLi);
+                while (phraseLi.firstChild) {
+                    phraseLi.removeChild(phraseLi.firstChild);
+                    console.log(phraseLi.firstChild);
                 }
                 
                 //enables each key on the beyboard & updates each key with the key class
-                const keysArray = [...document.querySelectorAll('.key')]; 
-                keysArray.forEach(key => {
-                    //key.setAttribute("disabled", false);
-                    key.className = 'key';
+                const keysArray = [...document.querySelectorAll('.keyrow button')]; 
+                keysArray.forEach(button => {
+                    button.removeAttribute("disabled", true);
+                    button.className = 'key';
                 });
 
                 //resets all the heart images 
