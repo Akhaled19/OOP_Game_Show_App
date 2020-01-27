@@ -93,7 +93,7 @@ class Game {
            if(this.missed === 5 ) {
             //call the gameOver() method 
             this.gameOver(false);
-            //console.log(`missed ${this.missed}`)
+            console.log(`missed ${this.missed}`)
            }    
         } 
 
@@ -136,6 +136,7 @@ class Game {
             } else if (gameWon === false) {
                 overlay.classList.remove('win');
                 overlay.classList.add('lose');
+                console.log('color: ' + overlay.classList);
 
                 overlay.style.display = "block";
 
@@ -147,11 +148,11 @@ class Game {
         //Restarts the game between games 
         restart() {
                 //removes all li elements from the phrase ul element
-                const phraseLi = [...document.querySelectorAll('ul li')];
-                console.log(phraseLi);
-                while (phraseLi.firstChild) {
-                    phraseLi.removeChild(phraseLi.firstChild);
-                    console.log(phraseLi.firstChild);
+                const phraseUl = document.querySelector(' #phrase ul ');
+                console.log(phraseUl);
+                while (phraseUl.firstChild) {
+                    phraseUl.removeChild(phraseUl.firstChild);
+                    console.log(phraseUl.firstChild);
                 }
                 
                 //enables each key on the beyboard & updates each key with the key class
