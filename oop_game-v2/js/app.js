@@ -29,7 +29,9 @@ screenKeyboard.addEventListener('click', (e) => {
     }
 
 });
-    
-//notes//
+
+
+//notes for future//
+//Must use keydown or keyup 
 //MUST use HTML and CSS 
 //MUST personalize the App styles & noted in the README.md file     
