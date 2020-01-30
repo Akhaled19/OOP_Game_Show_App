@@ -16,6 +16,7 @@ startGameButton.addEventListener('click', () => {
     //starts the game 
     game.startGame();
     
+    
 }); 
 
 //add a click event to each of the onscreen keyboard buttons = user interaction

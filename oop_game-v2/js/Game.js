@@ -127,8 +127,8 @@ class Game {
 
             //this method displays a final 'win' or 'loss' message and updates overlay screen with CSS class
             if (gameWon === true) {       
-                overlay.classList.remove('start');
-                overlay.classList.add('win');
+                //overlay.classList.remove('start');
+                overlay.className = 'win';
 
                 overlay.style.display = "block";
 
@@ -136,8 +136,8 @@ class Game {
                 
                 
             } else if (gameWon === false) {
-                overlay.classList.remove('win');
-                overlay.classList.add('lose');
+                //overlay.classList.remove('win');
+                overlay.className = 'lose';
 
                 overlay.style.display = "block";
 
