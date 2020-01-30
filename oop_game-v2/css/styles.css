@@ -139,7 +139,7 @@ button {
 
 .wrong {
   background: red;
-  color: #FFFFFF;
+  color: gray;
 }
 
 .btn__reset {

@@ -9,6 +9,7 @@
 
 //add a click event(keyup or keydown) to button = Start Game
 startGameButton.addEventListener('click', () => {
+   
     //creates a new game object  
     game = new Game();
     //reset the game
