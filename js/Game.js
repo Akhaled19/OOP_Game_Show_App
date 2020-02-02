@@ -110,6 +110,7 @@ class Game {
 
             //checks if the player won: is the length of the hiddenPhraseLetters greater than 0 ?
             if(hiddenPhraseLetters.length > 0) {
+                console.log(hiddenPhraseLetters);
                 //keep the game going
                 return false;
             //if the shown letters length equals to the activePhrase letters length    
@@ -117,6 +118,7 @@ class Game {
                 //stop the game, the player has won
                 return true;
             }
+            
         }
 
         //this method deals with updating the screen after each game
@@ -128,6 +130,7 @@ class Game {
             //this method displays a final 'win' or 'loss' message and updates overlay screen with CSS class
             if (gameWon === true) {       
                 //overlay.classList.remove('start');
+                //overlay.classList.add('win');
                 overlay.className = 'win';
 
                 overlay.style.display = "block";
@@ -135,16 +138,18 @@ class Game {
                 gameOverMessageH1.textContent = "Congratulations, you won!";
                 
                 
-            } else if (gameWon === false) {
+            } else if (gameWon === false){
+                //overlay.classList.remove('start');
                 //overlay.classList.remove('win');
+                //overlay.classList.add('lose');
                 overlay.className = 'lose';
 
                 overlay.style.display = "block";
 
                 gameOverMessageH1.textContent = "Game over! You ran out of lives.";
             }
-            this.restart();
-           
+            console.log(gameWon);
+            this.restart(); 
         }    
         
         //Restarts the game between games 
@@ -160,13 +165,12 @@ class Game {
                 }
                 
                 //grabs all keyrow div's buttons and stores them in an array
-                const keysArray = [...document.querySelectorAll('.key')]; 
+                const keysArray = [...document.querySelectorAll('.keyrow button')]; 
 
                 //enables each button on the beyboard & updates each button with the key class
                 keysArray.forEach(button => {
                     button.removeAttribute("disabled", true);
-                    button.classList.remove('chosen');
-                    button.classList.remove('wrong');
+                    button.className = 'key';
                 });
 
                 //grabs all imgs in the  scoreboard and stores them in an array
