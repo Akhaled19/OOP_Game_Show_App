@@ -143,6 +143,7 @@ class Game {
 
                 gameOverMessageH1.textContent = "Game over! You ran out of lives.";
             }
+            this.restart();
            
         }    
         
@@ -159,15 +160,16 @@ class Game {
                 }
                 
                 //grabs all keyrow div's buttons and stores them in an array
-                const keysArray = [...document.querySelectorAll('.keyrow button')]; 
+                const keysArray = [...document.querySelectorAll('.key')]; 
 
                 //enables each button on the beyboard & updates each button with the key class
                 keysArray.forEach(button => {
                     button.removeAttribute("disabled", true);
-                    button.className = 'key';
+                    button.classList.remove('chosen');
+                    button.classList.remove('wrong');
                 });
 
-                //grabs all imgs in the scoreboard and stores them in an array
+                //grabs all imgs in the  scoreboard and stores them in an array
                 const heartArray = [...document.querySelectorAll('#scoreboard li img')];
 
                 //resets all the heart images 

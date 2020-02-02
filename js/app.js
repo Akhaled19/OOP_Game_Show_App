@@ -12,8 +12,6 @@ startGameButton.addEventListener('click', () => {
    
     //creates a new game object  
     game = new Game();
-    //reset the game
-    game.restart();
     //starts the game 
     game.startGame();
     
