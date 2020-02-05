@@ -55,6 +55,11 @@ class Game {
                 //and the button is revealed
                 this.activePhrase.showMatchedLetter(button.textContent);
                 //console.log(`button is: ${button}`);
+                 //if all letters  in the phrase are set to show CSS class
+                if(this.checkForWin()) {
+                    //player won
+                    this.gameOver(true);
+                } 
                   
             //if the button clicked by the player does not match a letter in the phrase       
             } else {
@@ -63,11 +68,6 @@ class Game {
                 //a life is removed
                 this.removeLife();
 
-            } 
-            //if all letters  in the phrase are set to show CSS class
-            if(this.checkForWin()) {
-                //player won
-                this.gameOver(true);
             }  
         }
              
